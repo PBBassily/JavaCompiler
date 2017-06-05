@@ -1,0 +1,355 @@
+		     +--------------------------+
+       	       	     |		CS 140		|
+		     | PROJECT 2: USER PROGRAMS	|
+		     | 	   DESIGN DOCUMENT     	|
+		     +--------------------------+
+
+---- GROUP ----
+Paula Boules  <pbbassily@gmail.com>
+Peter Atef    <peteratef342@gmail.com>
+Mark  Philip  <markphilip2018@gmail.com>
+
+
+---- PRELIMINARIES ----
+			   ARGUMENT PASSING
+			   ================
+
+---- DATA STRUCTURES ----
+
+>> A1: Copy here the declaration of each new or changed `struct' or
+>> `struct' member, global or static variable, `typedef', or
+>> enumeration.  Identify the purpose of each in 25 words or less.
+
+********************************************************************************
+-	No new structs or variables were used, but to pass the arguments of command
+and their number; setup_stack(), load() are over-ridden to pass those variables
+********************************************************************************
+
+---- ALGORITHMS ----
+
+>> A2: Briefly describe how you implemented argument parsing.  How do
+>> you arrange for the elements of argv[] to be in the right order?
+>> How do you avoid overflowing the stack page?
+
+********************************************************************************
+-	Call "split_space()", returning array containing separated parse arguments >in
+start_process()
+-	Call populate_stack() >> In setup_stack()
+-	In populate_stack: do for all arguments is argv[] in reversed order:
+		[a]- Update esp by subtracting the size of the current argument.
+		[b]- Store the updated esp in "addresses" for pushing later.
+		[c]- Push the current argument. (By copying it starting from updated esp).
+-  Update esp and push extra bytes -if necessary- to round esp to x4 (word-align)
+-  Update esp and push a NULL pointer indicating the end of argv[].
+-  Update esp and push elements in "addresses" in reverse order.
+-  Update esp and push the address of the top of stack (argv).
+-  Update esp and push argc ( number of arguments).
+-  Update esp and push a fake return address.
+
+-In start_process(), the success boolean which indicates if stack page overflow
+detected, the argument won't be loaded, by exiting the current thread,
+this boolean is set by the return value of load()
+********************************************************************************
+
+---- RATIONALE ----
+
+>> A3: Why does Pintos implement strtok_r() but not strtok()?
+
+********************************************************************************
+-	The _r versions of functions (like: strtok_r) are reentrant: you can call them
+from multiple threads simultaneously, or in nested loops, etc.
+Reentrant versions usually take an extra argument, this argument is used to
+store state between calls instead of using a global variable, which is
+"save_ptr" in our implementation
+-	The non-reentrant versions (like: strtok) often use global state, so if you
+call them from multiple threads, you are probably invoking undefined behavior.
+********************************************************************************
+
+>> A4: In Pintos, the kernel separates commands into a executable name
+>> and arguments.  In Unix-like systems, the shell does this
+>> separation.  Identify at least two advantages of the Unix approach.
+
+********************************************************************************
+- It is safer because shell could check any malicious commands or arguments
+before they go to the kernel.
+- It makes the kernel code cleaner and simpler since all the ugly string
+parsing is done outside.
+********************************************************************************
+
+			     SYSTEM CALLS
+			     ============
+
+---- DATA STRUCTURES ----
+
+>> B1: Copy here the declaration of each new or changed `struct' or
+>> `struct' member, global or static variable, `typedef', or
+>> enumeration.  Identify the purpose of each in 25 words or less.
+
+********************************************************************************
+structures :
+------------
+
+in threads/thread.h
+---------------------
+
+struct thread {
+
+    int num_fd_mappers; // number of files open by this thread
+    struct hash mapper; // Hash map contains the files that open by this thread
+    struct thread* parent; // pointer to the parent of the thread
+    struct list children; // list of the children of the thread
+    struct semaphore waitSema; // used in wait function to wait if one of the
+															 // children`s thread running
+    struct semaphore execSema; // used in execute the parent process should wait
+		 													 // for its children to be executed
+  };
+
+--------------------------------------------------------------------------------
+/*
+	this struct hold the information about the child thread that the parent kept
+  them in children list
+*/
+struct child
+{
+  struct thread* child_t; // child thread
+  tid_t child_pid; // the child thread pid
+  struct list_elem elem; // list element
+  enum exit_status exs; // exit status to know how the child thread exit
+  int status; // status fo the thread
+  bool somethread_is_waiting_on_me; // boolean to know if the parent wait twice
+																		// on the same child (ERROR)
+  bool loaded; // boolean indicate that the child thread successfully loaded
+};
+--------------------------------------------------------------------------------
+/*
+	this struct hold the information about the file that the parent kept hash map
+ 	of it
+*/
+struct fd_mapper
+{
+  int fd; // id for the file
+  struct file* file; // struct file
+  struct hash_elem hash_elem; // hash element used in hash map
+};
+--------------------------------------------------------------------------------
+Enumeration :
+-------------
+
+//An enumeration to define possible states for exiting the system.
+enum exit_status{
+  KILLED, // killed by the kernel
+  NORMAL_EXIT, // exit normally
+  RUNNING // running (alive)
+};
+--------------------------------------------------------------------------------
+global variable :
+-----------------
+
+struct lock fileSystem_lock; // to protect the system calls
+********************************************************************************
+
+
+>> B2: Describe how file descriptors are associated with open files.
+>> Are file descriptors unique within the entire OS or just within a
+>> single process?
+
+********************************************************************************
+First Part :
+------------
+-	File descriptor struct we have the file variable to map the the file descriptor
+with open files
+-	We have two functions :
+--> int addFile(struct file* f):
+		insert the file in the hash map of the current_thread()
+
+--> struct file* getFile(int fd) :
+		return the file from the given fd number in the descriptor struct
+		of the current thread
+
+
+Second Part :
+--------------
+-	File descriptors are unique  within a single process .
+-	Each process has a hash of file descriptors.
+-	File descriptors are not inherited by child processes.
+-	Each time single process open the same file it has a different file descriptor
+struct and id .
+-	Any file can be opened by the different processes and may take the same id
+(fd variable in our implementation).
+********************************************************************************
+
+---- ALGORITHMS ----
+
+>> B3: Describe your code for reading and writing user data from the
+>> kernel.
+
+********************************************************************************
+-->int read(int fd, void *buffer, unsigned length) :
+
+-	If  fd = 0 : reads from the keyboard using input_getc()
+- Else : get the file by its fd parameter (get the file descriptor from the hash
+map of the current process and return null if not found and file descriptor
+struct if found), then get the file from file descriptor and read it using
+file_read(f_opened, buffer, length), and return the number that actually read
+from the file .
+
+--> int write(int fd, const void *buffer, unsigned length) :
+
+-	If fd = 1 : write to the console using putbuf(buffer, length)
+-	Else : get the file by its fd parameter (get the file descriptor from the hash
+map of the current process and return null if not found and file descriptor
+struct if found), then get the file from file descriptor and read it using
+file_write(f_opened, buffer, length), and return the number that actually
+written to the file .
+********************************************************************************
+
+>> B4: Suppose a system call causes a full page (4,096 bytes) of data
+>> to be copied from user space into the kernel.  What is the least
+>> and the greatest possible number of inspections of the page table
+>> (e.g. calls to pagedir_get_page()) that might result?  What about
+>> for a system call that only copies 2 bytes of data?  Is there room
+>> for improvement in these numbers, and how much?
+
+********************************************************************************
+For full page:
+-	Least number of inspections is 1 inspection of page table
+-	Greatest number of inspections is 2 inspections of page table
+A single page can be allocated in a maximum of 2 pages so we check boundaries
+of the page to check that the 2 pages are mapped to kernel virtual memory to
+insure that these two pages are valid.
+
+For 2 bytes of data:
+-	The same as for full page as there can be a byte in one page, and the other is
+on another page.
+********************************************************************************
+
+>> B5: Briefly describe your implementation of the "wait" system call
+>> and how it interacts with process termination.
+
+********************************************************************************
+Implementation of wait :
+------------------------
+-	Get the current thread and loop on its children list and check if the
+child_tid equal to the child thread pid then check if this thread i waited on it
+before or not if true return -1(ERROR) else set the boolean to true, and if this
+thread state is running thread so wait on it else we return the child status,
+if the current thread has no children return -1.
+
+Interaction with process termination :
+--------------------------------------
+-	It interacts with the process termination in process_exit() signal the
+parent's semaphore (waitSema) that was wait on this child thread.
+
+********************************************************************************
+>> B6: Any access to user program memory at a user-specified address
+>> can fail due to a bad pointer value.  Such accesses must cause the
+>> process to be terminated.  System calls are fraught with such
+>> accesses, e.g. a "write" system call requires reading the system
+>> call number from the user stack, then each of the call's three
+>> arguments, then an arbitrary amount of user memory, and any of
+>> these can fail at any point.  This poses a design and
+>> error-handling problem: how do you best avoid obscuring the primary
+>> function of code in a morass of error-handling?  Furthermore, when
+>> an error is detected, how do you ensure that all temporarily
+>> allocated resources (locks, buffers, etc.) are freed?  In a few
+>> paragraphs, describe the strategy or strategies you adopted for
+>> managing these issues.  Give an example.
+
+********************************************************************************
+-	We handle that the user might send a bad pointer,we validate esp
+(stack pointer) before reading any argument .
+-	Also, we check that the data pointed by esp is also valid and within the user
+allowed memory.
+-	If an error is detected, we call 'exit' with status of -1 to indicate an
+error, so as to kill the thread.
+-	We use a lock to enforce synchronization to avoid concurrency issues that
+might occur.
+********************************************************************************
+
+---- SYNCHRONIZATION ----
+
+>> B7: The "exec" system call returns -1 if loading the new executable
+>> fails, so it cannot return before the new executable has completed
+>> loading.  How does your code ensure this?  How is the load
+>> success/failure status passed back to the thread that calls "exec"?
+
+********************************************************************************
+-	Using semaphore (execSema) which makes the parent process sleeps until
+its child completes loading using sema_down(), if child is loaded successfully,
+a valid pid will be returned, -1 otherwise
+-	it is saved in struct member (loaded) in the children list of the thread, each
+child in the list has his own (pid) member to be unique
+********************************************************************************
+
+
+>> B8: Consider parent process P with child process C.  How do you
+>> ensure proper synchronization and avoid race conditions when P
+>> calls wait(C) before C exits?  After C exits?  How do you ensure
+>> that all resources are freed in each case?  How about when P
+>> terminates without waiting, before C exits?  After C exits?  Are
+>> there any special cases?
+
+********************************************************************************
+- When P calls wait(C) before C exits:
+A semaphore carried by the child to insure synchronization ,so if the child
+hasn’t exited, its status will be RUNNING ,the parent will wait on the semaphore
+which is initialized to 0 so the parent will always wait.When the child exits,
+it will signal its parent before exiting so the parent can return the status of
+his child correctly
+
+- When P calls wait(C) after C exits:
+If C exits before the parent wait,the status of the child won’t be RUNNING so
+the parent will not wait and it will return the exit status of the child whether
+it was terminated. Therefore, it will not wait on the child, and will return
+the exit status of the dead child.
+
+-	Ensure that the resources will be freed:
+ The children free its resources when it exits after it signals its parent
+ so it has nothing to do with these cases
+
+-	When P terminates without waiting, before or after C exits :
+We keep the semaphore structure in the child's thread, so signaling the
+semaphore will not cause any thread to wait, as the parent thread has terminated
+********************************************************************************
+---- RATIONALE ----
+********************************************************************************
+
+>> B9: Why did you choose to implement access to user memory from the
+>> kernel in the way that you did?
+********************************************************************************
+-	If the system calls requires a buffer we validate two times  first time to
+check on the first address, if it is valid or not as shown below then we check
+on the last address which is the sum of the starting address and the buffer size.
+-	Else if the call does not need a buffer it check only on the first address
+
+-	When an address enter we check on it by validate_address( address ) method
+which take the address we want to check it.the function is very simple,
+it checks that the address if it is greater than the PHYS_BASE it return false
+indicating an error else the address is in the user space.
+-	So that's why we make it like that : it is fast and simple.
+********************************************************************************
+
+>> B10: What advantages or disadvantages can you see to your design
+>> for file descriptors?
+
+********************************************************************************
+The Advantages:
+-	File descriptor can hole the id which given to the file when it is opened
+-	The descriptors are put in a hash map which give us the ability to search in
+order of O(1), which help us because we use the descriptors Hash-Map a lot which
+improve the system performance.
+
+The Disadvantages:
+-	When the process open many file the Hash-Map will become crowded and the
+insertion will become of order O(n), instead of being of order O(1) which why
+we chose the Hash-Map
+********************************************************************************
+
+>> B11: The default tid_t to pid_t mapping is the identity mapping.
+>> If you changed it, what advantages are there to your approach?
+
+********************************************************************************
+-	If we change it, we can introduce  multi-threading per process feature to the
+Pintos in this phase, as many tid maps to same pid (i.e. many threads maps to
+the same process)
+********************************************************************************
