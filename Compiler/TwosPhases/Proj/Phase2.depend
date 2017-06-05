@@ -1,0 +1,354 @@
+# depslib dependency file v1.0
+1492693144 source:/home/paula/Documents/codeblocks_workspace/Compilers/Phase2/main.cpp
+	<iostream>
+
+1492688728 
+
+1492693181 source:/home/paula/Documents/codeblocks_workspace/Compilers/Phase2/src/ParsingTable.cpp
+	"ParsingTable.h"
+
+1492852542 ble.h"
+
+1492694144 /home/paula/Documents/codeblocks_workspace/Compilers/Phase2/include/ParsingTable.h
+	"Element.h"
+	"phase2.h"
+
+1492688728 /home/paula/Documents/codeblocks_workspace/Compilers/Phase2/include/Element.h
+	"phase2.h"
+
+1492688728 /home/paula/Documents/codeblocks_workspace/Compilers/Phase2/include/phase2.h
+	<map>
+	<list>
+	<malloc.h>
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	<regex>
+	<iostream>
+	<vector>
+
+1492693846 source:/home/paula/Documents/codeblocks_workspace/Compilers/Phase2/src/InputParser.cpp
+	"InputParser.h"
+
+1492946006 er.h"
+
+1492693846 /home/paula/Documents/codeblocks_workspace/Compilers/Phase2/include/InputParser.h
+
+1492707045 source:c:\users\lenovo\desktop\phase_2(follow)\phase2\main.cpp
+	<iostream>
+	"phase2.h"
+
+1492708986 source:c:\users\lenovo\desktop\phase_2(follow)\phase2\src\parsingtable.cpp
+	"ParsingTable.h"
+
+1492715108 c:\users\lenovo\desktop\phase_2(follow)\phase2\include\parsingtable.h
+	"Element.h"
+	"phase2.h"
+
+1492713123 c:\users\lenovo\desktop\phase_2(follow)\phase2\include\element.h
+	"phase2.h"
+
+1492707269 c:\users\lenovo\desktop\phase_2(follow)\phase2\include\phase2.h
+	<map>
+	<list>
+	<malloc.h>
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	<regex>
+	<iostream>
+	<vector>
+	<set>
+	"Element.h"
+	"ParsingTable.h"
+
+1492951862 source:c:\users\maria\desktop\csed-term 6\compilers\project_trails\phase2_trails\new folder\2.2\phase2\main.cpp
+	<iostream>
+	"phase2.h"
+	"InputParser.h"
+	"LL_Productions.h"
+
+1492906134 tions.h"
+
+1492951829 c:\users\maria\desktop\csed-term 6\compilers\project_trails\phase2_trails\new folder\2.2\phase2\include\phase2.h
+	<map>
+	<list>
+	<malloc.h>
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	<regex>
+	<iostream>
+	<vector>
+	<set>
+	<fstream>
+	"Element.h"
+	"ParsingTable.h"
+	"InputParser.h"
+	"LL_productions.h"
+	"Maching.h"
+
+1492951650 "
+
+1492753210 c:\users\maria\desktop\csed-term 6\compilers\project_trails\phase2_trails\new folder\2.2\phase2\include\element.h
+	"phase2.h"
+
+1492851125 c:\users\maria\desktop\csed-term 6\compilers\project_trails\phase2_trails\new folder\2.2\phase2\include\parsingtable.h
+	"phase2.h"
+
+1492852542 source:c:\users\maria\desktop\csed-term 6\compilers\project_trails\phase2_trails\new folder\2.2\phase2\src\parsingtable.cpp
+	"ParsingTable.h"
+
+1492946006 source:c:\users\maria\desktop\csed-term 6\compilers\project_trails\phase2_trails\new folder\2.2\phase2\src\inputparser.cpp
+	"InputParser.h"
+
+1492945267 c:\users\maria\desktop\csed-term 6\compilers\project_trails\phase2_trails\new folder\2.2\phase2\include\inputparser.h
+	"phase2.h"
+
+1492906048 c:\users\maria\desktop\csed-term 6\compilers\project_trails\phase2_trails\new folder\2.2\phase2\include\ll_productions.h
+	"phase2.h"
+
+1492906134 source:c:\users\maria\desktop\csed-term 6\compilers\project_trails\phase2_trails\new folder\2.2\phase2\src\ll_productions.cpp
+	"LL_productions.h"
+
+1492951671 c:\users\maria\desktop\csed-term 6\compilers\project_trails\phase2_trails\new folder\2.2\phase2\include\maching.h
+	"phase2.h"
+
+1492951650 source:c:\users\maria\desktop\csed-term 6\compilers\project_trails\phase2_trails\new folder\2.2\phase2\src\maching.cpp
+	"Maching.h"
+
+1493119548 source:/media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2/main.cpp
+	<iostream>
+	"phase2.h"
+	"InputParser.h"
+
+1493042168 /media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2/include/phase2.h
+	<map>
+	<list>
+	<malloc.h>
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	<regex>
+	<iostream>
+	<vector>
+	<set>
+	<fstream>
+	"Element.h"
+	"ParsingTable.h"
+	"InputParser.h"
+	"LL_productions.h"
+	"Matching.h"
+
+1492753210 /media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2/include/Element.h
+	"phase2.h"
+
+1492851124 /media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2/include/ParsingTable.h
+	"phase2.h"
+
+1492945266 /media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2/include/InputParser.h
+	"phase2.h"
+
+1492906048 /media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2/include/LL_productions.h
+	"phase2.h"
+
+1492992662 /media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2/include/Maching.h
+	"phase2.h"
+
+1492946006 source:/media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2/src/InputParser.cpp
+	"InputParser.h"
+
+1492906134 source:/media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2/src/LL_productions.cpp
+	"LL_productions.h"
+
+1493145268 source:/media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2/src/ParsingTable.cpp
+	"ParsingTable.h"
+
+1492992761 source:/media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2/src/Maching.cpp
+	"Maching.h"
+
+1493041299 /media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2/include/Matching.h
+	"phase2.h"
+
+1493126654 source:/media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2/src/Matching.cpp
+	"Matching.h"
+
+1493212410 source:/media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2_[34]_[]_[]_[]/Phase2/main.cpp
+	<iostream>
+	"phase2.h"
+	"InputParser.h"
+
+1493042168 /media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2_[34]_[]_[]_[]/Phase2/include/phase2.h
+	<map>
+	<list>
+	<malloc.h>
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	<regex>
+	<iostream>
+	<vector>
+	<set>
+	<fstream>
+	"Element.h"
+	"ParsingTable.h"
+	"InputParser.h"
+	"LL_productions.h"
+	"Matching.h"
+
+1492753210 /media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2_[34]_[]_[]_[]/Phase2/include/Element.h
+	"phase2.h"
+
+1492851124 /media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2_[34]_[]_[]_[]/Phase2/include/ParsingTable.h
+	"phase2.h"
+
+1492945266 /media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2_[34]_[]_[]_[]/Phase2/include/InputParser.h
+	"phase2.h"
+
+1492906048 /media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2_[34]_[]_[]_[]/Phase2/include/LL_productions.h
+	"phase2.h"
+
+1493041299 /media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2_[34]_[]_[]_[]/Phase2/include/Matching.h
+	"phase2.h"
+
+1492946006 source:/media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2_[34]_[]_[]_[]/Phase2/src/InputParser.cpp
+	"InputParser.h"
+
+1492906134 source:/media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2_[34]_[]_[]_[]/Phase2/src/LL_productions.cpp
+	"LL_productions.h"
+
+1493215354 source:/media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2_[34]_[]_[]_[]/Phase2/src/ParsingTable.cpp
+	"ParsingTable.h"
+
+1493215354 source:/media/shereen/C28425B68425AE3B/computer/compiler_prject/Parser/Final/Phase2_[34]_[]_[]_[]/Phase2/src/Matching.cpp
+	"Matching.h"
+
+1493235856 source:d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\main.cpp
+	<iostream>
+	"phase2.h"
+	"InputParser.h"
+	"Parser.h"
+	"NFA.h"
+	"DFA.h"
+	"Mini_DFA.h"
+	"Lexical_Analyzer.h"
+	"Phase_one.h"
+
+1493042168 d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\include\phase2.h
+	<map>
+	<list>
+	<malloc.h>
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	<regex>
+	<iostream>
+	<vector>
+	<set>
+	<fstream>
+	"Element.h"
+	"ParsingTable.h"
+	"InputParser.h"
+	"LL_productions.h"
+	"Matching.h"
+
+1492753210 d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\include\element.h
+	"phase2.h"
+
+1492851124 d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\include\parsingtable.h
+	"phase2.h"
+
+1492945266 d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\include\inputparser.h
+	"phase2.h"
+
+1492906048 d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\include\ll_productions.h
+	"phase2.h"
+
+1493236450 d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\include\matching.h
+	"phase2.h"
+
+1492946006 source:d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\src\inputparser.cpp
+	"InputParser.h"
+
+1492906134 source:d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\src\ll_productions.cpp
+	"LL_productions.h"
+
+1493237598 source:d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\src\matching.cpp
+	"Matching.h"
+
+1493229039 source:d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\src\parsingtable.cpp
+	"ParsingTable.h"
+
+1491737411 d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\include\parser.h
+	"Phase_one.h"
+
+1491708300 d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\include\phase_one.h
+	<iostream>
+	<map>
+	<list>
+	<set>
+	<malloc.h>
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	<regex>
+	<fstream>
+	<iostream>
+	<vector>
+	<utility>
+
+1490463448 d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\include\nfa.h
+	"State.h"
+	<iostream>
+	<map>
+	<string>
+	<vector>
+	<stack>
+	"State.h"
+	"DFA.h"
+
+1490463460 d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\include\state.h
+	<string>
+	<vector>
+	<iostream>
+	<map>
+
+1491666824 d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\include\dfa.h
+	"NFA.h"
+	"State.h"
+	"Phase_one.h"
+
+1491764240 d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\include\mini_dfa.h
+	"DFA.h"
+	"Phase_one.h"
+	<map>
+
+1491819587 d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\include\lexical_analyzer.h
+	<string>
+	<map>
+	<vector>
+	"DFA.h"
+
+1491833006 source:d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\src\dfa.cpp
+	"DFA.h"
+
+1492950557 source:d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\src\mini_dfa.cpp
+	"../include/Mini_DFA.h"
+
+1491839894 source:d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\src\nfa.cpp
+	"NFA.h"
+	"DFA.h"
+	<vector>
+
+1491826694 source:d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\src\parser.cpp
+	"Parser.h"
+
+1491826725 source:d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\src\state.cpp
+	"State.h"
+
+1493234769 source:d:\menna\third\menna 6\compilers\project\phase_2\phase2(last version)\new folder\phase2\phase2\src\lexical_analyzer.cpp
+	<set>
+	<iostream>
+	<fstream>
+	"Lexical_Analyzer.h"
+

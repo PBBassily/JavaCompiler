@@ -1,0 +1,145 @@
+METHOD_BODY --> STATEMENT_LIST 
+STATEMENT_LIST --> STATEMENT STATEMENT_LIST_X 
+STATEMENT --> DECLARATION 
+DECLARATION --> PRIMITIVE_TYPE id ; 
+PRIMITIVE_TYPE --> float 
+match :: float
+match :: id
+Error:missing ;
+Error:(illegal STATEMENT_LIST_X )– discard ,
+STATEMENT_LIST_X --> STATEMENT STATEMENT_LIST_X 
+STATEMENT --> ASSIGNMENT 
+ASSIGNMENT --> id = EXPRESSION ; 
+match :: id
+Error:missing =
+Error:follow missing EXPRESSION
+match :: ;
+STATEMENT_LIST_X --> STATEMENT STATEMENT_LIST_X 
+STATEMENT --> ASSIGNMENT 
+ASSIGNMENT --> id = EXPRESSION ; 
+match :: id
+Error:missing =
+Error:(illegal EXPRESSION )– discard addop
+Error:(illegal EXPRESSION )– discard addop
+Error:follow missing EXPRESSION
+match :: ;
+STATEMENT_LIST_X --> STATEMENT STATEMENT_LIST_X 
+STATEMENT --> ASSIGNMENT 
+ASSIGNMENT --> id = EXPRESSION ; 
+match :: id
+Error:missing =
+Error:(illegal EXPRESSION )– discard addop
+Error:(illegal EXPRESSION )– discard addop
+Error:follow missing EXPRESSION
+match :: ;
+STATEMENT_LIST_X --> STATEMENT STATEMENT_LIST_X 
+STATEMENT --> WHILE 
+WHILE --> while ( EXPRESSION ) { STATEMENT } 
+match :: while
+match :: (
+EXPRESSION --> SIMPLE_EXPRESSION EXPRESSION_X 
+SIMPLE_EXPRESSION --> TERM SIMPLE_EXPRESSION_X 
+TERM --> FACTOR TERM_X 
+FACTOR --> id 
+match :: id
+TERM_X --> Epsilon
+SIMPLE_EXPRESSION_X --> Epsilon
+EXPRESSION_X --> relop SIMPLE_EXPRESSION 
+match :: relop
+SIMPLE_EXPRESSION --> TERM SIMPLE_EXPRESSION_X 
+TERM --> FACTOR TERM_X 
+FACTOR --> num 
+match :: num
+TERM_X --> Epsilon
+SIMPLE_EXPRESSION_X --> Epsilon
+match :: )
+match :: {
+STATEMENT --> ASSIGNMENT 
+ASSIGNMENT --> id = EXPRESSION ; 
+match :: id
+match :: =
+Error:(illegal EXPRESSION )– discard assign
+EXPRESSION --> SIMPLE_EXPRESSION EXPRESSION_X 
+SIMPLE_EXPRESSION --> TERM SIMPLE_EXPRESSION_X 
+TERM --> FACTOR TERM_X 
+FACTOR --> id 
+match :: id
+TERM_X --> Epsilon
+SIMPLE_EXPRESSION_X --> addop TERM SIMPLE_EXPRESSION_X 
+match :: addop
+TERM --> FACTOR TERM_X 
+FACTOR --> num 
+match :: num
+TERM_X --> Epsilon
+SIMPLE_EXPRESSION_X --> Epsilon
+EXPRESSION_X --> Epsilon
+match :: ;
+match :: }
+STATEMENT_LIST_X --> STATEMENT STATEMENT_LIST_X 
+STATEMENT --> IF 
+IF --> if ( EXPRESSION ) { STATEMENT } else { STATEMENT } 
+match :: if
+match :: (
+EXPRESSION --> SIMPLE_EXPRESSION EXPRESSION_X 
+SIMPLE_EXPRESSION --> TERM SIMPLE_EXPRESSION_X 
+TERM --> FACTOR TERM_X 
+FACTOR --> id 
+match :: id
+TERM_X --> Epsilon
+SIMPLE_EXPRESSION_X --> Epsilon
+EXPRESSION_X --> relop SIMPLE_EXPRESSION 
+match :: relop
+SIMPLE_EXPRESSION --> TERM SIMPLE_EXPRESSION_X 
+TERM --> FACTOR TERM_X 
+FACTOR --> num 
+match :: num
+TERM_X --> Epsilon
+SIMPLE_EXPRESSION_X --> Epsilon
+match :: )
+match :: {
+STATEMENT --> ASSIGNMENT 
+ASSIGNMENT --> id = EXPRESSION ; 
+match :: id
+match :: =
+Error:(illegal EXPRESSION )– discard assign
+EXPRESSION --> SIMPLE_EXPRESSION EXPRESSION_X 
+SIMPLE_EXPRESSION --> TERM SIMPLE_EXPRESSION_X 
+TERM --> FACTOR TERM_X 
+FACTOR --> id 
+match :: id
+TERM_X --> Epsilon
+SIMPLE_EXPRESSION_X --> addop TERM SIMPLE_EXPRESSION_X 
+match :: addop
+TERM --> FACTOR TERM_X 
+FACTOR --> num 
+match :: num
+TERM_X --> Epsilon
+SIMPLE_EXPRESSION_X --> Epsilon
+EXPRESSION_X --> Epsilon
+match :: ;
+match :: }
+match :: else
+match :: {
+STATEMENT --> ASSIGNMENT 
+ASSIGNMENT --> id = EXPRESSION ; 
+match :: id
+match :: =
+Error:(illegal EXPRESSION )– discard assign
+EXPRESSION --> SIMPLE_EXPRESSION EXPRESSION_X 
+SIMPLE_EXPRESSION --> TERM SIMPLE_EXPRESSION_X 
+TERM --> FACTOR TERM_X 
+FACTOR --> id 
+match :: id
+TERM_X --> Epsilon
+SIMPLE_EXPRESSION_X --> addop TERM SIMPLE_EXPRESSION_X 
+match :: addop
+TERM --> FACTOR TERM_X 
+FACTOR --> id 
+match :: id
+TERM_X --> Epsilon
+SIMPLE_EXPRESSION_X --> Epsilon
+EXPRESSION_X --> Epsilon
+match :: ;
+match :: }
+STATEMENT_LIST_X --> Epsilon
+Accept
